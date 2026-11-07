@@ -15,6 +15,7 @@ docker run --rm -p 8080:80 linesterminal-site
 ## Files
 
 - `index.html`: the page
-- `*.png`: screenshots
-- `Caddyfile`: static file server config (gzip, 1-day cache on PNGs)
+- `assets/`: screenshots (WebP + PNG), icon, favicons, OG image
+- `favicon.svg`, `favicon.ico`: from the `lines` app icon
+- `Caddyfile`: static file server config (compression, /health for Clank, 1-day cache on assets)
 - `Dockerfile`: image build

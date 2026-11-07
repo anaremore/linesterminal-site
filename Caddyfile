@@ -1,7 +1,8 @@
 :80 {
 	root * /srv
-	encode gzip
+	encode zstd gzip
 	respond /health 200
+	header /assets/* Cache-Control "public, max-age=86400"
+	header /favicon.* Cache-Control "public, max-age=86400"
 	file_server
-	header /*.png Cache-Control "public, max-age=86400"
 }

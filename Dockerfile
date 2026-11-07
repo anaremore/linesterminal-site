@@ -1,4 +1,5 @@
 FROM caddy:2-alpine
-COPY index.html chart-orders-footprint.png tick-chart.png light.png /srv/
+COPY index.html favicon.svg favicon.ico /srv/
+COPY assets /srv/assets
 COPY Caddyfile /etc/caddy/Caddyfile
 EXPOSE 80

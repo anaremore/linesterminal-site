@@ -1,112 +1,245 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lines Terminal</title>
-<meta name="description" content="A native futures charting, DOM and trading terminal. Fast, exact, and built for discretionary and prop-firm traders.">
+<meta name="description" content="A native futures charting, DOM and trading terminal. Fast, exact, and built for discretionary and prop-firm traders. Pre-alpha, paper trading only.">
+<meta name="theme-color" content="#11141b">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://linesterminal.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lines Terminal">
+<meta property="og:title" content="Lines Terminal: the futures terminal that keeps up">
+<meta property="og:description" content="Native charts, DOM and order flow for discretionary and prop-firm traders. Built in Rust. Pre-alpha, paper trading only.">
+<meta property="og:url" content="https://linesterminal.com/">
+<meta property="og:image" content="https://linesterminal.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lines Terminal footprint chart with order lines beside a DOM and time and sales">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lines Terminal: the futures terminal that keeps up">
+<meta name="twitter:description" content="Native charts, DOM and order flow for discretionary and prop-firm traders. Built in Rust. Pre-alpha, paper trading only.">
+<meta name="twitter:image" content="https://linesterminal.com/assets/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/hero.webp" type="image/webp" media="(min-width: 641px)">
 <style>
-:root{--ink:#11141b;--panel:#171b24;--edge:#2a3040;--dim:#9a9fb2;--paper:#eceaf4;--violet:#8c7bff;--up:#3fcf9a;--down:#ff6b7f}
+:root{
+  --ink:#11141b;--panel:#161a23;--panel-2:#1b2030;--edge:#262c3b;--edge-2:#333a4d;
+  --dim:#9a9fb2;--paper:#eceaf4;--violet:#8c7bff;--violet-hi:#a99cff;--up:#3fcf9a;
+  --r:12px;--wrap:1120px;--gutter:24px;
+}
 *{box-sizing:border-box}
-.site{background:var(--ink);color:var(--paper);font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;border-radius:10px;overflow:hidden}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-nav{display:flex;align-items:center;gap:22px;padding:16px 0}
-.logo{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.01em}
-.mark{width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--violet),#5b4ee0);position:relative}
-.mark:after{content:"";position:absolute;left:5px;right:5px;top:10px;height:2px;background:var(--ink);box-shadow:0 -5px 0 var(--ink),0 5px 0 var(--ink)}
-nav a{color:var(--dim);text-decoration:none;font-size:14px}nav .sp{flex:1}
-.gh{border:1px solid var(--edge);border-radius:6px;padding:6px 12px;color:var(--paper)!important}
-.hero{padding:44px 0 26px;text-align:center}
-.badge{display:inline-block;border:1px solid var(--violet);color:var(--violet);border-radius:99px;padding:3px 12px;font-size:12px;font-weight:600;letter-spacing:.04em}
-h1{font-size:44px;line-height:1.1;margin:18px 0 12px;letter-spacing:-.02em}
-h1 em{font-style:normal;color:var(--violet)}
-.lede{color:var(--dim);font-size:18px;max-width:640px;margin:0 auto}
-.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:7px;padding:11px 18px;font-weight:600;text-decoration:none;font-size:15px}
-.primary{background:var(--violet);color:var(--ink)}
-.ghost{border:1px solid var(--edge);color:var(--paper)}
-.small{color:var(--dim);font-size:13px}
-.shot{margin:30px auto 0;border:1px solid var(--edge);border-radius:10px;overflow:hidden;box-shadow:0 24px 80px rgba(140,123,255,.18)}
-.shot img{display:block;width:100%;height:auto}
-section{padding:56px 0}
-h2{font-size:26px;margin:0 0 8px;letter-spacing:-.01em}
-.sub{color:var(--dim);margin:0 0 26px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--edge);border-radius:9px;padding:18px}
-.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0;color:var(--dim);font-size:14px}
-.k{font-family:ui-monospace,Consolas,monospace;font-size:12px;border:1px solid var(--edge);border-radius:4px;padding:1px 5px;color:var(--paper)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.two .shot{margin:0}
-.cap{color:var(--dim);font-size:13px;margin-top:8px}
-.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.os{background:var(--panel);border:1px solid var(--edge);border-radius:9px;padding:16px;text-decoration:none;color:var(--paper)}
-.os b{display:block;font-size:16px}.os span{color:var(--dim);font-size:13px}
-.note{border-left:3px solid var(--violet);background:var(--panel);padding:12px 16px;border-radius:0 8px 8px 0;color:var(--dim);font-size:14px;margin-top:18px}
-.roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.rm{border:1px solid var(--edge);border-radius:9px;padding:14px}
-.rm .st{font-size:12px;font-weight:700;letter-spacing:.05em}
-.done{color:var(--up)}.now{color:var(--violet)}.next{color:var(--dim)}
-.rm ul{margin:8px 0 0;padding-left:18px;color:var(--dim);font-size:14px}
-footer{border-top:1px solid var(--edge);padding:22px 0;color:var(--dim);font-size:13px;display:flex;gap:18px;flex-wrap:wrap}
-footer a{color:var(--dim)}
-@media(max-width:720px){h1{font-size:32px}.two{grid-template-columns:1fr}nav a:not(.gh){display:none}}
-</style></head><body>
-<div class="site">
-<div class="wrap">
- <nav><div class="logo"><div class="mark"></div>Lines Terminal</div><span class="sp"></span>
-  <a href="#features">Features</a><a href="#download">Download</a><a href="#roadmap">Roadmap</a><a href="https://github.com/anaremore/lines#readme">Docs</a>
-  <a class="gh" href="https://github.com/anaremore/lines">GitHub</a></nav>
+html,body{margin:0;background:var(--ink);color:var(--paper)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font:400 16px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--violet-hi);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:16px;top:-48px;background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:8px;font-weight:600;z-index:10}
+.skip:focus{top:16px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
 
- <div class="hero">
-  <span class="badge">PRE-ALPHA · PAPER TRADING ONLY</span>
+/* nav */
+header{position:sticky;top:0;z-index:5;background:rgba(17,20,27,.78);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid rgba(38,44,59,.6)}
+nav{display:flex;align-items:center;gap:8px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+.logo img{width:24px;height:24px;border-radius:6px;box-shadow:0 0 0 1px var(--edge-2)}
+nav a.l{color:var(--dim);text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:8px;transition:color .15s}
+nav a.l:hover{color:var(--paper)}
+.gh{margin-left:8px;border:1px solid var(--edge-2);border-radius:8px;padding:6px 14px;font-size:14px;font-weight:500;text-decoration:none;transition:background .15s,border-color .15s}
+.gh:hover{background:var(--panel-2);border-color:#424a60}
+
+/* hero */
+.hero{padding-top:96px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--edge-2);color:var(--dim);border-radius:99px;padding:4px 12px 4px 10px;font-size:12px;font-weight:500;letter-spacing:.02em}
+.badge i{width:6px;height:6px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 3px rgba(140,123,255,.18)}
+h1,h2,h3{text-wrap:balance;font-weight:600}
+h1{font-size:clamp(32px,4.4vw,48px);line-height:1.08;letter-spacing:-.032em;margin:24px auto 16px;max-width:16ch}
+h1 em{font-style:normal;color:var(--violet-hi)}
+.lede{color:var(--dim);font-size:18px;line-height:1.6;max-width:36em;margin:0 auto;text-wrap:pretty}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:32px 0 16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:10px;padding:0 20px;font-weight:600;font-size:15px;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
+.primary{background:var(--violet);color:var(--ink)}
+.primary:hover{background:var(--violet-hi)}
+.ghost{border:1px solid var(--edge-2);color:var(--paper)}
+.ghost:hover{background:var(--panel-2);border-color:#424a60}
+.small{color:var(--dim);font-size:13px}
+.shot{display:block;position:relative;border:1px solid var(--edge);border-radius:var(--r);overflow:hidden;background:var(--panel)}
+.hero .shot{margin:64px auto 0;box-shadow:0 0 0 1px rgba(140,123,255,.06),0 32px 96px -32px rgba(140,123,255,.28),0 16px 40px -16px rgba(0,0,0,.6)}
+.hero .shot img{width:100%}
+.tap{display:none}
+
+/* sections */
+main section{padding:128px 0 0}
+.eyebrow{color:var(--violet-hi);font-size:13px;font-weight:600;letter-spacing:.04em;margin:0 0 16px}
+h2{font-size:clamp(26px,3vw,32px);line-height:1.15;letter-spacing:-.024em;margin:0 0 16px;max-width:22ch}
+.sub{color:var(--dim);font-size:17px;margin:0 0 48px;max-width:38em;text-wrap:pretty}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--edge);border-radius:var(--r);padding:24px}
+.card svg{width:20px;height:20px;color:var(--violet-hi);margin-bottom:16px;display:block}
+.card h3{margin:0 0 8px;font-size:16px;letter-spacing:-.01em}
+.card p{margin:0;color:var(--dim);font-size:15px;line-height:1.6}
+.k{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:13px;background:var(--panel-2);border:1px solid var(--edge-2);border-radius:6px;padding:1px 6px;color:var(--paper);white-space:nowrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+figure{margin:0}
+figcaption{color:var(--dim);font-size:14px;margin-top:16px}
+
+/* download */
+.dl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.os{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--edge);border-radius:var(--r);padding:24px;text-decoration:none;transition:border-color .15s,background .15s}
+.os:hover{border-color:#424a60;background:var(--panel-2)}
+.os div{flex:1}
+.os b{display:block;font-size:16px;font-weight:600}
+.os span{color:var(--dim);font-size:14px}
+.os svg{width:20px;height:20px;color:var(--dim);flex:none}
+.os:hover svg{color:var(--paper)}
+.note{display:flex;gap:16px;border:1px solid var(--edge);background:var(--panel);padding:16px 24px;border-radius:var(--r);color:var(--dim);font-size:15px;margin-top:16px;line-height:1.7}
+.note strong{color:var(--paper);font-weight:600}
+
+/* roadmap */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rm{border:1px solid var(--edge);border-radius:var(--r);padding:24px}
+.st{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.02em}
+.st:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.done{color:var(--up)}.now{color:var(--violet-hi)}.next{color:var(--dim)}
+.rm ul{margin:16px 0 0;padding:0;list-style:none;color:var(--dim);font-size:15px}
+.rm li{padding:8px 0;border-top:1px solid var(--edge)}
+.rm li:first-child{border-top:0}
+
+/* footer */
+footer{margin-top:128px;border-top:1px solid var(--edge)}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center;padding-top:32px;padding-bottom:48px;color:var(--dim);font-size:14px}
+footer a{color:var(--dim);text-decoration:none}
+footer a:hover{color:var(--paper);text-decoration:underline}
+footer .sp{flex:1}
+
+@media (max-width:900px){
+  .grid,.dl,.roadmap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  :root{--gutter:20px}
+  nav a.l{display:none}
+  .hero{padding-top:64px}
+  .lede{font-size:17px}
+  .cta .btn{flex:1 1 auto}
+  .hero .shot{width:100vw;margin:48px 0 0 calc(50% - 50vw);border-radius:0;border-left:0;border-right:0}
+  .tap{display:block;margin-top:16px}
+  main section{padding-top:96px}
+  .sub{margin-bottom:32px}
+  .grid,.dl,.roadmap,.two{grid-template-columns:1fr}
+  .two{gap:32px;margin-top:32px}
+  footer{margin-top:96px}
+  footer .sp{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+ <div class="wrap">
+  <nav aria-label="Main">
+   <a class="logo" href="/" aria-label="Lines home"><img src="/assets/icon.svg" width="24" height="24" alt="">Lines</a>
+   <a class="l" href="#features">Features</a>
+   <a class="l" href="#download">Download</a>
+   <a class="l" href="#roadmap">Roadmap</a>
+   <a class="l" href="https://github.com/anaremore/lines/blob/main/README.md">Docs</a>
+   <a class="gh" href="https://github.com/anaremore/lines">GitHub</a>
+  </nav>
+ </div>
+</header>
+
+<main id="main">
+ <div class="wrap hero">
+  <span class="badge"><i aria-hidden="true"></i>Pre-alpha · paper trading only</span>
   <h1>The futures terminal that <em>keeps up</em>.</h1>
   <p class="lede">Native charts, DOM and order flow for discretionary and prop-firm traders. Built in Rust: exact prices, nothing dropped, and nothing between your click and your order.</p>
   <div class="cta">
-   <a class="btn primary" href="#download">Download v0.3.1</a>
+   <a class="btn primary" href="#download">Download v0.3.2</a>
    <a class="btn ghost" href="https://github.com/anaremore/lines">View source</a>
   </div>
   <div class="small">Windows · macOS · Linux · free under FSL-1.1</div>
-  <div class="shot"><img src="chart-orders-footprint.png" alt="Lines Terminal: footprint chart with a long position, stop and target order lines, beside a DOM and time and sales"></div>
+  <a class="shot" href="/assets/hero.png" aria-label="Open the full-size screenshot">
+   <picture>
+    <source media="(max-width: 640px)" type="image/webp" srcset="/assets/hero-mobile.webp" width="624" height="312">
+    <source media="(max-width: 640px)" srcset="/assets/hero-mobile.png" width="624" height="312">
+    <source type="image/webp" srcset="/assets/hero.webp" width="1600" height="900">
+    <img src="/assets/hero.png" width="1600" height="900" fetchpriority="high" decoding="async" alt="Lines Terminal: footprint chart with a long position, stop and target order lines, beside a DOM and time and sales">
+   </picture>
+  </a>
+  <div class="small tap">Tap the image for the full screenshot</div>
  </div>
-</div>
 
-<section id="features"><div class="wrap">
- <h2>Built for the moment you click</h2>
- <p class="sub">Everything here works today, on mock, replay and live crypto feeds.</p>
- <div class="grid">
-  <div class="card"><h3>Chart trading</h3><p>See and drag your orders on the chart. Drag from the position line to set a stop or target. Exits are reduce-only and can never flip you.</p></div>
-  <div class="card"><h3>DOM that holds still</h3><p>A fixed-row ladder with market buttons, brackets, and a price trail. The layout never shifts under your pointer.</p></div>
-  <div class="card"><h3>Order flow</h3><p>Footprint, volume profile, cumulative delta and VWAP, rebuilt from stored trades the moment you open the app.</p></div>
-  <div class="card"><h3>Any bar you want</h3><p>Time, tick, volume, range and seconds bars. Type <span class="k">500t</span>, <span class="k">10r</span> or <span class="k">5</span> and press Enter.</p></div>
-  <div class="card"><h3>Prop rules and guardrails</h3><p>Daily loss, trailing drawdown, max trades and cooldowns, enforced before the order leaves, never after.</p></div>
-  <div class="card"><h3>Journal and strategies</h3><p>Every round trip with MAE/MFE and tags. Strategies run on paper through the same rules as your clicks.</p></div>
- </div>
- <div class="two" style="margin-top:22px">
-  <div><div class="shot"><img src="tick-chart.png" alt="A 500-tick chart"></div><div class="cap">Tick charts from counted trades</div></div>
-  <div><div class="shot"><img src="light.png" alt="Lines in the light theme"></div><div class="cap">Light, dark and colorblind palettes, all WCAG AA</div></div>
- </div>
-</div></section>
+ <section id="features" aria-labelledby="features-h"><div class="wrap">
+  <p class="eyebrow">Features</p>
+  <h2 id="features-h">Built for the moment you click</h2>
+  <p class="sub">Everything here works today, on mock, replay and live crypto feeds.</p>
+  <div class="grid">
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 15l4-4 3 3 6-7"/><path d="M14 7h6"/></svg>
+    <h3>Chart trading</h3><p>See and drag your orders on the chart. Drag from the position line to set a stop or target. Exits are reduce-only and can never flip you.</p></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M11 5h9"/><path d="M8 9.5h12"/><path d="M4 14h16"/><path d="M4 18.5h11"/></svg>
+    <h3>DOM that holds still</h3><p>A fixed-row ladder with market buttons, brackets, and a price trail. The layout never shifts under your pointer.</p></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 20v-8"/><path d="M10 20V5"/><path d="M14 20v-6"/><path d="M18 20V9"/></svg>
+    <h3>Order flow</h3><p>Footprint, volume profile, cumulative delta and VWAP, rebuilt from stored trades the moment you open the app.</p></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+    <h3>Any bar you want</h3><p>Time, tick, volume, range and seconds bars. Type <span class="k">500t</span>, <span class="k">10r</span> or <span class="k">5</span> and press Enter.</p></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+    <h3>Prop rules and guardrails</h3><p>Daily loss, trailing drawdown, max trades and cooldowns, enforced before the order leaves, never after.</p></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h10a3 3 0 0 1 3 3v13H8a2 2 0 0 1-2-2z"/><path d="M6 18a2 2 0 0 1 2-2h11"/><path d="M10 8h5"/></svg>
+    <h3>Journal and strategies</h3><p>Every round trip with MAE/MFE and tags. Strategies run on paper through the same rules as your clicks.</p></div>
+  </div>
+  <div class="two">
+   <figure><div class="shot"><picture><source type="image/webp" srcset="/assets/tick-chart.webp"><img src="/assets/tick-chart.png" width="1200" height="700" loading="lazy" decoding="async" alt="A 500-tick candlestick chart with VWAP bands"></picture></div><figcaption>Tick charts from counted trades</figcaption></figure>
+   <figure><div class="shot"><picture><source type="image/webp" srcset="/assets/light.webp"><img src="/assets/light.png" width="1600" height="900" loading="lazy" decoding="async" alt="Lines in the light theme: a chart with order lines beside the DOM"></picture></div><figcaption>Light, dark and colorblind palettes, all WCAG AA</figcaption></figure>
+  </div>
+ </div></section>
 
-<section id="download"><div class="wrap">
- <h2>Download</h2>
- <p class="sub" id="ver">Latest release: v0.3.1</p>
- <div class="dl">
-  <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.1/lines-v0.3.1-windows-x64.zip"><b>Windows</b><span>x64 · .zip</span></a>
-  <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.1/lines-v0.3.1-macos-arm64.zip"><b>macOS</b><span>Apple silicon · .zip</span></a>
-  <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.1/lines-v0.3.1-linux-x64.tar.gz"><b>Linux</b><span>x64 · .tar.gz</span></a>
- </div>
- <div class="note">Pre-alpha. Paper trading only: no live broker orders yet. Try <span class="k">lines --source mock</span>, or <span class="k">--source coinbase --instrument BTC/USD</span> for live data. Builds aren't code-signed yet, so your OS may ask before the first run.</div>
-</div></section>
+ <section id="download" aria-labelledby="download-h"><div class="wrap">
+  <p class="eyebrow">Download</p>
+  <h2 id="download-h">Get Lines</h2>
+  <p class="sub" id="ver">Latest release: v0.3.2</p>
+  <div class="dl">
+   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-windows-x64.zip"><div><b>Windows</b><span>x64 · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-macos-arm64.zip"><div><b>macOS</b><span>Apple silicon · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-linux-x64.tar.gz"><div><b>Linux</b><span>x64 · .tar.gz</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+  </div>
+  <div class="note"><div><strong>Pre-alpha. Paper trading only:</strong> no live broker orders yet. Try <span class="k">lines --source mock</span>, or <span class="k">--source coinbase --instrument BTC/USD</span> for live data. Builds aren't code-signed yet, so your OS may ask before the first run.</div></div>
+ </div></section>
 
-<section id="roadmap"><div class="wrap">
- <h2>Where it's going</h2>
- <p class="sub">One platform, many data sources and brokers, connected through the same safety rules.</p>
- <div class="roadmap">
-  <div class="rm"><div class="st done">SHIPPED</div><ul><li>Charts, DOM, footprint</li><li>Chart and DOM paper trading</li><li>Prop rules and journal</li></ul></div>
-  <div class="rm"><div class="st now">IN PROGRESS</div><ul><li>Strategies on paper</li><li>Economic calendar and news blackout</li><li>Rithmic connection</li></ul></div>
-  <div class="rm"><div class="st next">NEXT</div><ul><li>SPY/QQQ options and chains</li><li>Live order routing (opt-in)</li><li>CQG and more brokers</li></ul></div>
- </div>
-</div></section>
+ <section id="roadmap" aria-labelledby="roadmap-h"><div class="wrap">
+  <p class="eyebrow">Roadmap</p>
+  <h2 id="roadmap-h">Where it's going</h2>
+  <p class="sub">One platform, many data sources and brokers, connected through the same safety rules.</p>
+  <div class="roadmap">
+   <div class="rm"><div class="st done">Shipped</div><ul><li>Charts, DOM, footprint</li><li>Chart and DOM paper trading</li><li>Prop rules and journal</li></ul></div>
+   <div class="rm"><div class="st now">In progress</div><ul><li>Strategies on paper</li><li>Economic calendar and news blackout</li><li>Rithmic connection</li></ul></div>
+   <div class="rm"><div class="st next">Next</div><ul><li>SPY/QQQ options and chains</li><li>Live order routing (opt-in)</li><li>CQG and more brokers</li></ul></div>
+  </div>
+ </div></section>
+</main>
 
-<div class="wrap"><footer><span>© 2026 Lines Terminal</span><a href="https://github.com/anaremore/lines">GitHub</a><a href="https://github.com/anaremore/lines/blob/main/LICENSE.md">License (FSL-1.1)</a><a href="mailto:dev@linesterminal.com">dev@linesterminal.com</a><span style="flex:1"></span><span>Trading futures involves substantial risk of loss.</span></footer></div>
-</div>
+<footer>
+ <div class="wrap">
+  <span>© 2026 Lines Terminal</span>
+  <a href="https://github.com/anaremore/lines">GitHub</a>
+  <a href="https://github.com/anaremore/lines/blob/main/LICENSE.md">License (FSL-1.1)</a>
+  <a href="mailto:dev@linesterminal.com">dev@linesterminal.com</a>
+  <span class="sp"></span>
+  <span>Trading futures involves substantial risk of loss.</span>
+ </div>
+</footer>
 <script>
 fetch("https://api.github.com/repos/anaremore/lines/releases?per_page=1").then(r=>r.json()).then(a=>{
  const r=a&&a[0]; if(!r)return; document.getElementById("ver").textContent="Latest release: "+r.tag_name;
@@ -116,4 +249,5 @@ fetch("https://api.github.com/repos/anaremore/lines/releases?per_page=1").then(r
  document.querySelector(".cta .primary").textContent="Download "+r.tag_name;
 }).catch(()=>{});
 </script>
-</body></html>
+</body>
+</html>
