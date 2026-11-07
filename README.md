@@ -28,7 +28,7 @@ Pushes to `main` auto-deploy on Clank (service `linesterminal`). To deploy by ha
 clank deploy 5a6719bf-0584-4f31-b786-0de822bf5dde --no-follow --wait
 ```
 
-Then check that every referenced asset is served:
+Then check the deploy: the script waits until the live page matches your local `index.html` (the old container keeps serving for a minute or two after Clank reports "active"), then requires HTTP 200 for every referenced asset:
 
 ```sh
 scripts/check-assets.sh                    # https://linesterminal.com
