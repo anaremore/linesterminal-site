@@ -5,4 +5,12 @@
 	header /assets/* Cache-Control "public, max-age=86400"
 	header /favicon.* Cache-Control "public, max-age=86400"
 	file_server
+
+	# Never let a CDN cache an error. During a rolling deploy the old
+	# container can 404 on new asset paths; Cloudflare would otherwise
+	# keep serving that 404 after the new container is live.
+	handle_errors {
+		header Cache-Control "no-store"
+		respond "{err.status_code} {err.status_text}" {err.status_code}
+	}
 }
