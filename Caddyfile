@@ -1,6 +1,7 @@
 :80 {
 	root * /srv
 	encode gzip
+	respond /health 200
 	file_server
 	header /*.png Cache-Control "public, max-age=86400"
 }
