@@ -42,5 +42,5 @@ Error responses are sent with `Cache-Control: no-store` (see `Caddyfile`), so a 
 With each `lines` release:
 
 - **Roadmap:** refresh the block marked `<!-- ROADMAP -->` in `index.html` (Shipped / In progress / Next) to match the release notes.
-- **Version:** the page script fills in the newest release's version and download links from the GitHub API, but update the `vX.Y.Z` fallbacks in `index.html` (hero button, "Latest release", the three download links) so the page is right without JS.
+- **Version:** nothing to update. The page hard-codes no version: without JS the hero button and the download cards link to the [releases page](https://github.com/anaremore/lines/releases) (every Lines release is a pre-release, so `releases/latest` and `releases/latest/download/...` don't resolve, and asset names include the version). The page script fills in the newest release's version and direct download links from the GitHub API.
 - **Screenshots:** if the UI changed noticeably, replace the PNGs in `assets/` and regenerate the `.webp` copies and `og.png`.

@@ -86,6 +86,9 @@ h2{font-size:clamp(26px,3vw,32px);line-height:1.15;letter-spacing:-.024em;margin
 .card svg{width:20px;height:20px;color:var(--violet-hi);margin-bottom:16px;display:block}
 .card h3{margin:0 0 8px;font-size:16px;letter-spacing:-.01em}
 .card p{margin:0;color:var(--dim);font-size:15px;line-height:1.6}
+.card ul{margin:0;padding:0 0 0 18px;color:var(--dim);font-size:15px;line-height:1.6}
+.card li{margin:4px 0}
+.card li::marker{color:var(--edge-2)}
 .k{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:13px;background:var(--panel-2);border:1px solid var(--edge-2);border-radius:6px;padding:1px 6px;color:var(--paper);white-space:nowrap}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
 figure{margin:0}
@@ -161,7 +164,7 @@ footer .sp{flex:1}
   <h1>The futures terminal that <em>keeps up</em>.</h1>
   <p class="lede">Native charts, DOM and order flow for discretionary and prop-firm traders. Built in Rust: exact prices, nothing dropped, and nothing between your click and your order.</p>
   <div class="cta">
-   <a class="btn primary" href="#download">Download v0.3.2</a>
+   <a class="btn primary" href="#download">Download</a>
    <a class="btn ghost" href="https://github.com/anaremore/lines">View source</a>
   </div>
   <div class="small">Windows · macOS · Linux · free under FSL-1.1</div>
@@ -179,26 +182,53 @@ footer .sp{flex:1}
  <section id="features" aria-labelledby="features-h"><div class="wrap">
   <p class="eyebrow">Features</p>
   <h2 id="features-h">Built for the moment you click</h2>
-  <p class="sub">Everything here works today, on mock, replay and live crypto feeds.</p>
+  <p class="sub">Everything here works today on paper, with mock, replay and live crypto data.</p>
   <div class="grid">
    <div class="card">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 15l4-4 3 3 6-7"/><path d="M14 7h6"/></svg>
-    <h3>Chart trading</h3><p>See and drag your orders on the chart. Drag from the position line to set a stop or target. Exits are reduce-only and can never flip you.</p></div>
-   <div class="card">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M11 5h9"/><path d="M8 9.5h12"/><path d="M4 14h16"/><path d="M4 18.5h11"/></svg>
-    <h3>DOM that holds still</h3><p>A fixed-row ladder with market buttons, brackets, and a price trail. The layout never shifts under your pointer.</p></div>
+    <h3>Trading, on paper</h3><ul>
+     <li>A redesigned trade panel: position card, Buy and Sell, brackets, then BE, Reverse, Cancel all and Flatten</li>
+     <li>Orders on the chart and a DOM that never shifts under your pointer</li>
+     <li>One-step Reverse: cancel, close, then open the other side</li>
+     <li>A Positions pane across every account, with Flatten all</li>
+     <li>Reset paper account (it flattens first)</li></ul></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7 15l4-4 3 3 6-7"/><path d="M14 7h6"/></svg>
+    <h3>Options on the underlying</h3><ul>
+     <li>A SPY option chart: the underlying's chart and the chain on one price scale</li>
+     <li>Entry, Stop and Target triggers on SPY's price, drawn as lines you can drag</li>
+     <li>P&amp;L to close with a Risk / Reward summary</li>
+     <li>Paper only, on recorded data for now</li></ul></div>
    <div class="card">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 20v-8"/><path d="M10 20V5"/><path d="M14 20v-6"/><path d="M18 20V9"/></svg>
-    <h3>Order flow</h3><p>Footprint, volume profile, cumulative delta and VWAP, rebuilt from stored trades the moment you open the app.</p></div>
+    <h3>Charts and order flow</h3><ul>
+     <li>Time, tick, volume, range and seconds bars: type <span class="k">500t</span> or <span class="k">10r</span></li>
+     <li>Footprint, volume profile, cumulative delta and VWAP</li>
+     <li>Volume and other studies in lower panes</li>
+     <li>A ruler: <span class="k">Shift</span>+drag, then move or resize it</li>
+     <li>External levels from any level source you plug in</li></ul></div>
    <div class="card">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
-    <h3>Any bar you want</h3><p>Time, tick, volume, range and seconds bars. Type <span class="k">500t</span>, <span class="k">10r</span> or <span class="k">5</span> and press Enter.</p></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M9 20V9"/></svg>
+    <h3>Interface</h3><ul>
+     <li>Right-click menus on panes, orders and drawings</li>
+     <li>UI zoom from 80 to 150 % (<span class="k">Ctrl+=</span> / <span class="k">Ctrl+−</span>)</li>
+     <li>Floating panels you can drag: palette, picker, studies</li>
+     <li>Times in Exchange (ET), your system zone or any zone</li>
+     <li>Dark and light themes, colorblind palettes, all WCAG AA</li></ul></div>
+   <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>
+    <h3>Data and updates</h3><ul>
+     <li>Coinbase and Kraken live public data, free</li>
+     <li>Record and Stop from the app; replay any recorded session</li>
+     <li>Order flow rebuilt from stored trades the moment you open the app</li>
+     <li>In-app updates on Windows: signed, verified before install, never during a trade</li></ul></div>
    <div class="card">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-    <h3>Prop rules and guardrails</h3><p>Daily loss, trailing drawdown, max trades and cooldowns, enforced before the order leaves, never after.</p></div>
-   <div class="card">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h10a3 3 0 0 1 3 3v13H8a2 2 0 0 1-2-2z"/><path d="M6 18a2 2 0 0 1 2-2h11"/><path d="M10 8h5"/></svg>
-    <h3>Journal and strategies</h3><p>Every round trip with MAE/MFE and tags. Strategies run on paper through the same rules as your clicks.</p></div>
+    <h3>Rules and journal</h3><ul>
+     <li>Daily loss, trailing drawdown, max trades and cooldowns, enforced before the order leaves</li>
+     <li>Economic calendar with news blackout</li>
+     <li>Every round trip journaled with MAE/MFE, tags and a snapshot</li>
+     <li>Strategies run on paper through the same rules as your clicks</li></ul></div>
   </div>
   <div class="two">
    <figure><div class="shot"><picture><source type="image/webp" srcset="/assets/tick-chart.webp"><img src="/assets/tick-chart.png" width="1200" height="700" loading="lazy" decoding="async" alt="A 500-tick candlestick chart with VWAP bands"></picture></div><figcaption>Tick charts from counted trades</figcaption></figure>
@@ -209,13 +239,13 @@ footer .sp{flex:1}
  <section id="download" aria-labelledby="download-h"><div class="wrap">
   <p class="eyebrow">Download</p>
   <h2 id="download-h">Get Lines</h2>
-  <p class="sub" id="ver">Latest release: v0.3.2</p>
+  <p class="sub" id="ver">The newest release is at the top of the <a href="https://github.com/anaremore/lines/releases">releases page</a>.</p>
   <div class="dl">
-   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-windows-x64.zip"><div><b>Windows</b><span>x64 · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
-   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-macos-arm64.zip"><div><b>macOS</b><span>Apple silicon · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
-   <a class="os" href="https://github.com/anaremore/lines/releases/download/v0.3.2/lines-v0.3.2-linux-x64.tar.gz"><div><b>Linux</b><span>x64 · .tar.gz</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+   <a class="os" href="https://github.com/anaremore/lines/releases"><div><b>Windows</b><span>x64 · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+   <a class="os" href="https://github.com/anaremore/lines/releases"><div><b>macOS</b><span>Apple silicon · .zip</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
+   <a class="os" href="https://github.com/anaremore/lines/releases"><div><b>Linux</b><span>x64 · .tar.gz</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></a>
   </div>
-  <div class="note"><div><strong>Pre-alpha. Paper trading only:</strong> no live broker orders yet. Try <span class="k">lines --source mock</span>, or <span class="k">--source coinbase --instrument BTC/USD</span> for live data. Builds aren't code-signed yet, so your OS may ask before the first run.</div></div>
+  <div class="note"><div><strong>Pre-alpha. Paper trading only:</strong> no live broker orders yet. Try <span class="k">lines --source mock</span>, or <span class="k">--source coinbase --instrument BTC/USD</span> for live data. Checksums are on each release. Builds aren't code-signed yet, so your OS may ask before the first run.</div></div>
  </div></section>
 
  <section id="roadmap" aria-labelledby="roadmap-h"><div class="wrap">
@@ -224,9 +254,9 @@ footer .sp{flex:1}
   <p class="sub">One platform, many data sources and brokers, connected through the same safety rules.</p>
   <div class="roadmap">
    <!-- ROADMAP: refresh with each release (see README, "Updating the site") -->
-   <div class="rm"><div class="st done">Shipped</div><ul><li>Charts, DOM, footprint</li><li>Chart and DOM paper trading</li><li>Prop rules, guardrails and journal</li><li>Strategies on paper (strategy panel)</li><li>Economic calendar and news blackout</li></ul></div>
-   <div class="rm"><div class="st now">In progress</div><ul><li>Rithmic connection</li><li>Order sizing and grouped order tags</li><li>SPY/QQQ option chain</li></ul></div>
-   <div class="rm"><div class="st next">Next</div><ul><li>Live order routing (opt-in)</li><li>CQG and more brokers</li></ul></div>
+   <div class="rm"><div class="st done">Shipped</div><ul><li>Charts, DOM, footprint and volume profile</li><li>Chart and DOM paper trading, Positions, Reverse</li><li>Prop rules, guardrails and journal</li><li>Strategies on paper</li><li>SPY option chart with triggers on the underlying</li><li>Record, replay and in-app updates (Windows)</li></ul></div>
+   <div class="rm"><div class="st now">In progress</div><ul><li>Several data sources at once</li><li>Settings › Connections for keys and logins</li><li>Databento past-day downloads</li><li>Replay bar: pause, speed and seek</li><li>Lower panes for external level studies</li><li>Rithmic connection</li></ul></div>
+   <div class="rm"><div class="st next">Next</div><ul><li>SPY/QQQ options with live data</li><li>Live order routing (opt-in)</li><li>CQG and more brokers</li><li>Updates on macOS and Linux</li></ul></div>
   </div>
  </div></section>
 </main>
