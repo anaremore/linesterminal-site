@@ -42,5 +42,5 @@ Error responses are sent with `Cache-Control: no-store` (see `Caddyfile`), so a 
 With each `lines` release:
 
 - **Roadmap:** refresh the block marked `<!-- ROADMAP -->` in `index.html` (Shipped / In progress / Next) to match the release notes.
-- **Version:** the page script fills in the newest release's version and download links from the GitHub API, but update the `vX.Y.Z` fallbacks in `index.html` (hero button, "Latest release", the three download links) so the page is right without JS.
-- **Screenshots:** if the UI changed noticeably, replace the PNGs in `assets/` and regenerate the `.webp` copies and `og.png`.
+- **Version:** nothing to change. The page script fills in the newest release's version and download links from the GitHub API; without JS the page says "Download" / "Latest release" and links to the releases page (`/releases/latest`, which GitHub redirects to the list while every release is a pre-release).
+- **Screenshots:** if the UI changed noticeably, replace the PNGs in `assets/` and regenerate the `.webp` copies and `og.png`. Synthetic data only (decision 0010 in `lines`): the recipe is in `lines` `docs/architecture.md` ("README images"); this site's `hero-mobile` is a 624x312 crop of the hero rendered with `--ui-zoom 125`, and `og.png` is the hero scaled to 1200 wide and cropped to 630 tall.
